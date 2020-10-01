@@ -4,12 +4,7 @@ import tamil, csv
 import tamil.utf8 as utf8
 import sys
 
-def main():
-
-    if len(sys.argv) < 2:
-        print("Please enter a file name.\n")
-        sys.exit(1)  # abort because of error
-
+def get_common_voice_sentences(file_path):
     text = ""
     with open(sys.argv[1], 'r', encoding = 'utf-8') as file:
         text = file.read()
@@ -18,7 +13,15 @@ def main():
     text = text.replace('\ufeff', '')
     text = text.replace('\n', '')
 
-    sentences = sent_tokenize(text)
+    return sent_tokenize(text)
+
+def main():
+
+    if len(sys.argv) < 2:
+        print("Please enter a file name.\n")
+        sys.exit(1)  # abort because of error
+
+    sentences = get_common_voice_sentences(sys.argv[1])
 
     total_sentences = len(sentences)
     sentences_gt_14 = 0
