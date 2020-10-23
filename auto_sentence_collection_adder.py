@@ -1,25 +1,35 @@
-from selenium import webdriver
+from selenium import webdriver # install gecko driver to use in firefox
 from selenium.webdriver.common.keys import Keys
-
 import time
 
+# Declare the e-mail & password of your GMAIL account
+#Note: Please enter verified email address with your mobile number otherwise while login Google will ask for mobile number
+
+email_address = ""
+password_for_email = ""
+
+#---- Nothing need to be changed---- 
 browser = webdriver.Firefox()
-browser.get('https://common-voice.github.io/sentence-collector/#/login')
+browser.get('https://commonvoice.mozilla.org/sentence-collector/login')
 
 time.sleep(10)
 
-username = browser.find_element_by_id("username")
-username.send_keys('PUT_your_USERNAME')
+googleLogin = browser.find_element_by_xpath("/html/body/div[2]/form/fieldset/div[2]/ul/li[3]/button")
+googleLogin.send_keys(Keys.ENTER)
 
 time.sleep(10)
 
-password = browser.find_element_by_id("password")
-password.send_keys('PUT_your_PASSWORD')
+email = browser.find_element_by_id("identifierId")
+email.send_keys(email_address)
+
+emailSelect = browser.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]").click()
 
 time.sleep(10)
 
-submitBtn = browser.find_element_by_xpath("/html/body/div/div/main/form/section[2]/button")
-submitBtn.send_keys(Keys.ENTER)
+password = browser.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input")
+password.send_keys(password_for_email)
+
+PasswordSelect = browser.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]").click()
 
 time.sleep(10)
 
@@ -29,12 +39,12 @@ addBtn.send_keys(Keys.ENTER)
 time.sleep(10)
 
 insertText = browser.find_element_by_xpath("//*[@id=\"sentences-input\"]")
-insertText.send_keys('மானம் குலம் கல்வி வண்மை அறிவுடைமை தானம் தவர்உயர்ச்சி தாளாண்மை')
+insertText.send_keys('அருள்புரிந்தனை புரிதலுங் களித்துத் தலையினால் நடந்தேன் விடைப்பாகா ')
 
 time.sleep(10)
 
 sourceInputText = browser.find_element_by_id("source-input")
-sourceInputText.send_keys('ஆத்திசூடி')
+sourceInputText.send_keys('திருவாசகம்')
 
 time.sleep(10)
 
@@ -44,6 +54,8 @@ time.sleep(10)
 
 submitBtn2 = browser.find_element_by_xpath("/html/body/div/div/main/form/section[5]/button")
 submitBtn2.send_keys(Keys.ENTER)
+
+time.sleep(10)
 
 confirmBtn = browser.find_element_by_xpath("/html/body/div/div/main/form/section/button")
 confirmBtn.send_keys(Keys.ENTER)
