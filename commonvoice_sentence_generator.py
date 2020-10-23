@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 
 # -*- coding: utf-8 -*-
@@ -18,7 +18,7 @@ from string import punctuation
 nltk.download('punkt')
 
 
-# In[2]:
+# In[ ]:
 
 
 # Symbols list that needs to be removed from sentences
@@ -32,9 +32,10 @@ special_symbols.add("“")
 special_symbols.add("‘")
 special_symbols.add("’")
 special_symbols.add("★")
+special_symbols.add("\"")
 
 
-# In[3]:
+# In[ ]:
 
 
 # Sentence word length range
@@ -42,7 +43,7 @@ MIN_WORDS_LENGTH = 3
 MAX_WORDS_LENGTH = 14
 
 
-# In[4]:
+# In[ ]:
 
 
 # gets path to the text file, cleans it according to rule and returns stats and valid sentences
@@ -94,7 +95,7 @@ def get_commonvoice_sentences(text_file_path, work_title):
     return stats, valid_sentences_df
 
 
-# In[5]:
+# In[ ]:
 
 
 #Returns the content of a text file
@@ -105,7 +106,7 @@ def get_file_content(text_file_path):
     return text
 
 
-# In[6]:
+# In[ ]:
 
 
 def drop_header_and_footers(sentences):
@@ -129,7 +130,7 @@ def drop_header_and_footers(sentences):
     return book_content_sentences
 
 
-# In[7]:
+# In[ ]:
 
 
 # Given a sentence, it removes all symbols in the special_symbols list
@@ -138,7 +139,7 @@ def remove_special_characters(sentence, special_symbols):
     return sentence
 
 
-# In[8]:
+# In[ ]:
 
 
 # If a word in any sentence is a digit, it converts it to a tamil string
@@ -164,7 +165,7 @@ def convert_num_to_tamil_string(sentence):
         return sentence
 
 
-# In[9]:
+# In[ ]:
 
 
 # Given a sentence, calculates the word length without punctuation
@@ -175,7 +176,7 @@ def get_sentence_length_without_punctuation(sentence):
     return sentence_length
 
 
-# In[10]:
+# In[ ]:
 
 
 # Remove extra spaces before punctuation
@@ -187,20 +188,20 @@ def clean_up_sentence(sentence):
     return sentence
 
 
-# In[11]:
+# In[ ]:
 
 
 source_texts = "/home/nat/Desktop/code/tamil/open_tamil_texts/collections/tamil_wikisource/data"
 extracted_sentences = "cleaned_sentences"
 
 
-# In[12]:
+# In[ ]:
 
 
 source_files = glob.glob(source_texts + "/*.txt")
 
 
-# In[13]:
+# In[ ]:
 
 
 run_report = []
@@ -215,14 +216,14 @@ for source_file in source_files:
     valid_sentences_df.to_csv(extracted_sentences + "/" + work_title + ".csv", index=False)
 
 
-# In[14]:
+# In[ ]:
 
 
 run_report_df = pd.DataFrame(run_report)
 run_report_df
 
 
-# In[15]:
+# In[ ]:
 
 
 # Total number of sentences
@@ -230,23 +231,29 @@ total_cv_sentences = run_report_df["total_sentences_after_processing"].sum()
 print("Total common voice sentences: " + str(total_cv_sentences))
 
 
-# In[16]:
+# In[ ]:
 
 
 # Percentage
 percent_converted_sentences = 100 * (run_report_df["total_sentences_after_processing"].sum() / run_report_df["total_sentences_before_processing"].sum())
 
 
-# In[17]:
+# In[ ]:
 
 
 print("Total common voice sentences as percentage of the original: " + str(percent_converted_sentences))
 
 
-# In[18]:
+# In[ ]:
 
 
 run_report_df.to_csv("tamil_wikisource_run_report.csv", index=False)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
